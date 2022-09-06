@@ -1,28 +1,32 @@
 require('dotenv').config();
-const {Telegraf} = require('telegraf');
-//const { Composer } = require('micro-bot');
+//const {Telegraf} = require('telegraf');
+const { Composer } = require('micro-bot');
 const puppeteer = require('puppeteer');
 
 //my web scraper module
 const scrape = require('./src/swagWebScraper.js')
 
-
-const bot = new Telegraf(TOKEN);
-
+//Telegraf bot
 /*
-//trying microbot (includes Telegraf)
-const bot = new Composer();
+const bot = new Telegraf(TOKEN);
 */
+
+
+//starting microbot (includes Telegraf)
+const bot = new Composer();
+
 
 //ngrok
 
 //retrieving data from env variables
-const{TOKEN, SERVER_URL} = process.env;
+//const{TOKEN, SERVER_URL} = process.env;
+//const PORT = process.env.PORT || 3000;
 
+/*
 //ngrok webhook
 const URI = `/webhook/${TOKEN}`;
 const webhook = SERVER_URL+URI;
-
+*/
 
 
 bot.catch((err, ctx) => {
@@ -209,20 +213,23 @@ bot.on('message', (ctx) => {
 
 })
 
-//***connection***
 
+//***heroku connection using microbot***
+module.exports = bot;
+
+//***connection***
+/*
 bot.launch({
     webhook: {
         domain:webhook,
-        port: 5000
+        port: PORT
     }
 })
-
-
-/*
-//***heroku connection using microbot***
-module.exports = bot;
 */
+
+
+
+
 
     //The code below doesn't work because cheerio doesn't simulate the browser,
     //all that I get from that page scraping are variable names. 
