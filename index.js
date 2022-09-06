@@ -1,23 +1,41 @@
 require('dotenv').config();
-const {Telegraf} = require('telegraf');
+//const {Telegraf} = require('telegraf');
+const { Composer } = require('micro-bot');
 const puppeteer = require('puppeteer');
 
 //my web scraper module
 const scrape = require('./src/swagWebScraper.js')
 
-//retrieving data from .env file
-const{TOKEN, SERVER_URL} = process.env;
-
+//Telegraf bot
+/*
 const bot = new Telegraf(TOKEN);
+*/
 
+
+//starting microbot (includes Telegraf)
+const bot = new Composer();
+
+
+//ngrok
+
+//retrieving data from env variables
+//const{TOKEN, SERVER_URL} = process.env;
+//const PORT = process.env.PORT || 3000;
+
+/*
 //ngrok webhook
 const URI = `/webhook/${TOKEN}`;
 const webhook = SERVER_URL+URI;
+*/
 
-let anime_manga;
+
 bot.catch((err, ctx) => {
     console.log(`Error ${ctx.updateType}`, err)
   })
+
+let anime_manga;  
+
+
 bot.start((ctx) => {
 
     bot.telegram.sendMessage(ctx.chat.id, 'Welcome to MangGet! What are you looking for?',
@@ -187,11 +205,27 @@ bot.on('message', (ctx) => {
                         buttons
                     }
                 });
-            }//fine else
+            }
         }
 
         anime();
     }
+
+})
+
+
+//***heroku connection using microbot***
+module.exports = bot;
+
+//***connection***
+/*
+bot.launch({
+    webhook: {
+        domain:webhook,
+        port: PORT
+    }
+})
+*/
 
 
 
@@ -208,26 +242,5 @@ bot.on('message', (ctx) => {
     //       console.log($(link).text() + ':\n  ' + $(link).attr('href'));
     //     });
     // });
-})
 
 
-bot.launch({
-    webhook: {
-        domain:webhook,
-        port: 5000
-    }
-})
-
-//manga
-// https://mangasee123.com/search/?name=
-
-//anime
-// anime8.ru
-// kickassanime.rs
-// animekaizoku.com
-// gogoanime.in
-// justdubs.org
-// vidstreaming.io
-// animeshow.tv
-// animerush.tv
-// twistmoe.net
