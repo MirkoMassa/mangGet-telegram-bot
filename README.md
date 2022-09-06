@@ -20,10 +20,10 @@
 .<br><br>
 
 ### Examples
-  Getting anime <br><br>
+  Getting anime <br>
   ![Alt Text](https://media4.giphy.com/media/HUoJb3xb75YZ97Ii0W/giphy.gif)
-  <br>
-  Getting manga <br><br>
+  <br><br>
+  Getting manga <br>
   ![Alt Text](https://media4.giphy.com/media/SmOAWktFcsWXo4TxgH/giphy.gif)
 
 
